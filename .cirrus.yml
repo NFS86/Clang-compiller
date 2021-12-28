@@ -1,0 +1,20 @@
+env:
+    LLVM_NAME: "NFS"
+    GH_PUSH_REPO_URL: 
+    GH_USERNAME:
+    GH_EMAIL:
+    GH_TOKEN:
+    TG_TOKEN: "ENCRYPTED[5889643df6c5e52e896de965d5d3f6224a81ad43acf01cfd1f1c552ceb663f5b368697ec679e0b8c7841f9042dc4e08c]"
+    TG_CHAT_ID: "ENCRYPTED[ea74b5030a1f5738ef3c505ed891a207b00d8a371d34055998510dbf33b48f31c4aaabc0fc129f7ccebf0366df89dd7e]"
+    CIRRUS_WORKING_DIR: "/tmp"
+    
+task:
+  name: "Setting Up, Syncing, Building and Uploading..."
+  timeout_in: 8h
+  container:
+      image: anggit86/dev:latest
+      cpu: 8
+      memory: 32G
+        
+  Build_script:
+       - ./build-tc.sh
