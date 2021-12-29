@@ -39,7 +39,7 @@ msg "$LLVM_NAME: Building LLVM..."
 tg_post_msg "<b>$LLVM_NAME: Building LLVM. . .</b>"
 ./build-llvm.py \
 	--clang-vendor "$LLVM_NAME" \
-  --branch "main" \
+        --branch "main" \
 	--projects "clang;compiler-rt;lld;polly" \
 	--targets "ARM;AArch64" \
 	--shallow-clone \
@@ -85,7 +85,7 @@ popd
 llvm_commit_url="https://github.com/llvm/llvm-project/commit/$short_llvm_commit"
 binutils_ver="$(ls | grep "^binutils-" | sed "s/binutils-//g")"
 clang_version="$(install/bin/clang --version | head -n1 | cut -d' ' -f4)"
-lld_version= "$(install/bin/lld --version | head -n 1)"
+
 tg_post_msg "<b>$LLVM_NAME: Toolchain compilation Finished</b>%0A<b>Clang Version : </b><code>$clang_version</code>%0A<b>LLVM Commit : </b>$llvm_commit_url%0A<b>Binutils Version : </b><code>$binutils_ver</code>"
 
 # Push to GitHub
@@ -104,7 +104,6 @@ Build completed on:  $(/bin/date)
 LLVM commit: $llvm_commit_url
 Clang Version: $clang_version
 Binutils version: $binutils_ver
-LLD version: $lld_version
 Builder commit: https://$GH_PUSH_REPO_URL/commit/$builder_commit"
 git gc
 git push origin main -f
