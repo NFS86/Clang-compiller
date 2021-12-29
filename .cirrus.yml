@@ -1,20 +1,27 @@
 env:
-    LLVM_NAME: "NFS"
-    GH_PUSH_REPO_URL: 
-    GH_USERNAME:
-    GH_EMAIL:
-    GH_TOKEN:
-    TG_TOKEN: "ENCRYPTED[5889643df6c5e52e896de965d5d3f6224a81ad43acf01cfd1f1c552ceb663f5b368697ec679e0b8c7841f9042dc4e08c]"
-    TG_CHAT_ID: "ENCRYPTED[ea74b5030a1f5738ef3c505ed891a207b00d8a371d34055998510dbf33b48f31c4aaabc0fc129f7ccebf0366df89dd7e]"
+    RCLONE: "ENCRYPTED[6629d44a7160bda4c164645c9756d1d09eb012820624d97d6dfd3c0b5198147f9688aac2ad52baa61c4e22ac17756118]"
+    LLVM_NAME: "NeedForSpeed"
+    GH_PUSH_REPO_URL: "ENCRYPTED[506ef06695315edeb46eabbbda3d5eeacbe812ba1521b5bdc118b1f6b3cffc9a59d5819d8df47a898e918d9817b8a2d3]"
+    GH_USERNAME: "ENCRYPTED[d9b4beebc6979b0afea52c6923d3b6a3e2a68c86979f0521fc0b73d1142ecf2fce7bbcbedebed25f4c679e82cf635116]"
+    GH_EMAIL: "ENCRYPTED[3626131ab61fab2719dd0111697a90436d73aa1444c0ef9f4a3f6c064c9337ec9173898032499e3bba17ca215caa9659]"
+    GH_TOKEN: "ENCRYPTED[0c32fb412da99036ea445fe0820659bd35048ea8237c599e145bed7ce53a132b17037b892a152bc18d1fad2f7790e000]"
+    TG_TOKEN: "ENCRYPTED[8004fd2f56168e57bd088b325e421530ce796c2e15e7b758869d0364d822de3c05214ce6285d2991df6fcbc7f64ec242]"
+    TG_CHAT_ID: "ENCRYPTED[c33289624c311f6dadddded5eac4e548c04a206b0a22592ebc1dbca201f482242ad62f8cf1e27a747e65280a7c8433f3]"
     CIRRUS_WORKING_DIR: "/tmp"
     
 task:
   name: "Setting Up, Syncing, Building and Uploading..."
-  timeout_in: 8h
+  timeout_in: 2h
   container:
       image: anggit86/dev:latest
       cpu: 8
       memory: 32G
         
+  Settup_environment_script:
+       - ./env.sh
+
   Build_script:
        - ./build-tc.sh
+
+  Upload_ccache_script:
+       - ./ziping.sh

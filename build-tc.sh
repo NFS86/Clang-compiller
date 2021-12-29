@@ -39,8 +39,8 @@ msg "$LLVM_NAME: Building LLVM..."
 tg_post_msg "<b>$LLVM_NAME: Building LLVM. . .</b>"
 ./build-llvm.py \
 	--clang-vendor "$LLVM_NAME" \
-        --branch "release/13.x" \
-	--projects "clang;lld;polly" \
+  --branch "main" \
+	--projects "clang;compiler-rt;lld;polly" \
 	--targets "ARM;AArch64" \
 	--shallow-clone \
 	--incremental \
@@ -85,27 +85,28 @@ popd
 llvm_commit_url="https://github.com/llvm/llvm-project/commit/$short_llvm_commit"
 binutils_ver="$(ls | grep "^binutils-" | sed "s/binutils-//g")"
 clang_version="$(install/bin/clang --version | head -n1 | cut -d' ' -f4)"
-
-tg_post_msg "<b>$LLVM_NAME: Toolchain compilation Finished</b>%0A<b>Clang Version : </b><code>$clang_version</code>%0A<b>LLVM Commit : </b><code>$llvm_commit_url</code>%0A<b>Binutils Version : </b><code>$binutils_ver</code>"
+lld_version= "$(install/bin/lld --version | head -n 1)"
+tg_post_msg "<b>$LLVM_NAME: Toolchain compilation Finished</b>%0A<b>Clang Version : </b><code>$clang_version</code>%0A<b>LLVM Commit : </b>$llvm_commit_url%0A<b>Binutils Version : </b><code>$binutils_ver</code>"
 
 # Push to GitHub
 # Update Git repository
 git config --global user.name $GH_USERNAME
 git config --global user.email $GH_EMAIL
-git clone "https://$GH_USERNAME:$GH_TOKEN@$GH_PUSH_REPO_URL" rel_repo
+git clone https://$GH_USERNAME:$GH_TOKEN@$GH_PUSH_REPO_URL rel_repo
 pushd rel_repo
 rm -fr ./*
 cp -r ../install/* .
-git checkout README.md # keep this as it's not part of the toolchain itself
-git add .
-git commit -asm "$LLVM_NAME: Toolchain Clang Bump to '$rel_date' Build of $llvm_commit_url
-
+echo "# $LLVM_NAME Clang $clang_version" >> README.md
+git add . -f
+git commit -asm "Release $LLVM_NAME Clang Bump $(/bin/date)
 Build completed on:  $(/bin/date)
 
 LLVM commit: $llvm_commit_url
 Clang Version: $clang_version
 Binutils version: $binutils_ver
+LLD version: $lld_version
 Builder commit: https://$GH_PUSH_REPO_URL/commit/$builder_commit"
-git push -f
+git gc
+git push origin main -f
 popd
-tg_post_msg "<b>$LLVM_NAME: Toolchain pushed to <code>https://$GH_PUSH_REPO_URL</code></b>"
+tg_post_msg "<b>$LLVM_NAME: Toolchain pushed to </b>https://$GH_PUSH_REPO_URL"
