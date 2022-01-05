@@ -42,6 +42,7 @@ tg_post_msg "<b>$LLVM_NAME: Building LLVM. . .</b>"
         --branch "main" \
 	--projects "clang;lld;polly" \
 	--targets "ARM;AArch64" \
+	--defines "LLVM_PARALLEL_COMPILE_JOBS=8 LLVM_PARALLEL_LINK_JOBS=8" \
 	--shallow-clone \
 	--incremental \
 	--build-type "Release" 2>&1 | tee build.log
