@@ -40,7 +40,7 @@ tg_post_msg "<b>$LLVM_NAME: Building LLVM. . .</b>"
 ./build-llvm.py \
 	--clang-vendor "$LLVM_NAME" \
         --branch "main" \
-	--projects "clang;compiler-rt;lld;polly" \
+	--projects "clang;lld;polly" \
 	--targets "ARM;AArch64" \
 	--defines "LLVM_PARALLEL_COMPILE_JOBS=8 LLVM_PARALLEL_LINK_JOBS=4" \
 	--shallow-clone \
