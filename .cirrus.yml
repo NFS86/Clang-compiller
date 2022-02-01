@@ -28,7 +28,7 @@ task:
        - export CCACHE_EXEC=$(which ccache)
        - export USE_CCACHE=1
        - export CCACHE_COMPRESS=true
-       - export CCACHE_COMPRESSLEVEL=3
+       - export CCACHE_COMPRESSLEVEL=-3
        - export CCACHE_LIMIT_MULTIPLE=1
        - ccache -M 10G
        - ccache -F 999999999
