@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /tmp
+cd /tmp/cirrus-ci-build
 
 com ()
 {

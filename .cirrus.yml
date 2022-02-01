@@ -9,20 +9,31 @@ env:
     GH_TOKEN: "ENCRYPTED[0c32fb412da99036ea445fe0820659bd35048ea8237c599e145bed7ce53a132b17037b892a152bc18d1fad2f7790e000]"
     TG_TOKEN: "ENCRYPTED[8004fd2f56168e57bd088b325e421530ce796c2e15e7b758869d0364d822de3c05214ce6285d2991df6fcbc7f64ec242]"
     TG_CHAT_ID: "ENCRYPTED[c33289624c311f6dadddded5eac4e548c04a206b0a22592ebc1dbca201f482242ad62f8cf1e27a747e65280a7c8433f3]"
-    CIRRUS_WORKING_DIR: "/tmp"
+    CIRRUS_WORKING_DIR: "/tmp/cirrus-ci-build"
     
 task:
-  name: "Setting Up, Syncing, Building and Uploading..."
+  name: "llvm building clang"
   timeout_in: 2h
   container:
-      image: anggit86/dev:latest
+      image: anggit86/docker:cirrus
       cpu: 8
       memory: 32G
         
   Settup_environment_script:
        - ./env.sh
+       - for t in ccache gcc g++ cc c++ clang clang++; do ln -vs /usr/bin/ccache /usr/local/bin/$t; done
 
   Build_script:
+       - export CCACHE_DIR=/tmp/cirrus-ci-build/ccache
+       - export CCACHE_EXEC=$(which ccache)
+       - export USE_CCACHE=1
+       - export CCACHE_COMPRESS=true
+       - export CCACHE_COMPRESSLEVEL=3
+       - export CCACHE_LIMIT_MULTIPLE=1
+       - ccache -M 10G
+       - ccache -F 999999999
+       - ccache -o compression=true
+       - ccache -z
        - ./build-tc.sh
 
   Upload_ccache_script:

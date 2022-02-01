@@ -39,13 +39,12 @@ msg "$LLVM_NAME: Building LLVM..."
 tg_post_msg "<b>$LLVM_NAME: Building LLVM. . .</b>"
 ./build-llvm.py \
 	--clang-vendor "$LLVM_NAME" \
-        --branch "main" \
-	--projects "clang;lld;polly" \
-	--targets "ARM;AArch64" \
-	--defines "LLVM_PARALLEL_COMPILE_JOBS=8 LLVM_PARALLEL_LINK_JOBS=4" \
-	--shallow-clone \
+	--defines "LLVM_PARALLEL_COMPILE_JOBS=$(nproc) LLVM_PARALLEL_LINK_JOBS=$(nproc) CMAKE_C_FLAGS=-O3 CMAKE_CXX_FLAGS=-O3" \
 	--incremental \
-	--build-type "Release" 2>&1 | tee build.log
+	--projects "clang;lld;polly" \
+	--pgo kernel-defconfig \
+	--shallow-clone \
+	--targets "ARM;AArch64;X86" 2>&1 | tee build.log
 
 # Check if the final clang binary exists or not.
 [ ! -f install/bin/clang-1* ] && {
@@ -57,7 +56,7 @@ tg_post_msg "<b>$LLVM_NAME: Building LLVM. . .</b>"
 # Build binutils
 msg "$LLVM_NAME: Building binutils..."
 tg_post_msg "<b>$LLVM_NAME: Building Binutils. . .</b>"
-./build-binutils.py --targets arm aarch64
+./build-binutils.py --targets arm aarch64 x86_64
 
 # Remove unused products
 rm -fr install/include
@@ -107,6 +106,12 @@ Clang Version: $clang_version
 Binutils version: $binutils_ver
 Builder commit: https://$GH_PUSH_REPO_URL/commit/$builder_commit"
 git gc
+# Downgrade the HTTP version to 1.1
+git config --global http.version HTTP/1.1
+# Increase git buffer size
+git config --global http.postBuffer 55428800
 git push origin main -f
-popd
+popd || exit
+# Set git buffer to original size
+git config --global http.version HTTP/2
 tg_post_msg "<b>$LLVM_NAME: Toolchain pushed to </b>https://$GH_PUSH_REPO_URL"
