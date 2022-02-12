@@ -28,10 +28,10 @@ task:
        - export CCACHE_EXEC=$(which ccache)
        - export USE_CCACHE=1
        - export CCACHE_COMPRESS=true
-       - ccache -M 10G
-       - ccache -F 999999999
+       - ccache -M 0
+       - ccache -F 0
        - ccache -o compression=true
-       - ccache -z
+       - ccache -c && ccache -z
        - ./build-tc.sh
 
   Upload_ccache_script:
