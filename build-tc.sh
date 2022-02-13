@@ -43,7 +43,8 @@ tg_post_msg "<b>$LLVM_NAME: Building LLVM. . .</b>"
 	--incremental \
 	--projects "clang;lld;polly;compiler-rt" \
 	--shallow-clone \
-	--targets "ARM;AArch64;X86" 2>&1 | tee build.log
+	--targets "ARM;AArch64;X86" \
+	--build-type "Release" 2>&1 | tee build.log
 
 # Check if the final clang binary exists or not.
 [ ! -f install/bin/clang-1* ] && {
