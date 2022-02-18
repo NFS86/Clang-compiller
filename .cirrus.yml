@@ -1,15 +1,13 @@
 env:
     RCLONE: "ENCRYPTED[6629d44a7160bda4c164645c9756d1d09eb012820624d97d6dfd3c0b5198147f9688aac2ad52baa61c4e22ac17756118]"
     LLVM_NAME: "NeedForSpeed"
-    GH_PUSH_REPO_URL: "ENCRYPTED[a33321bfb06796ea6099daa42011aa8ef72a7a404018601bf29e4a1d232383349941f4eedc059ff71f5de53c1e3f70fc]"
-    GIT_NAME: "ENCRYPTED[3a3817b2f5dee4994158626d74cc417e4055082601a84cc1eb26bb99dc1cfb0fd539546a9dce92a27f3e82471a0d87b8]"
-    GITLAB_PASWORD: "ENCRYPTED[708a4f8ddc7dc3d116df779c383608ea551b72799e78285e04ea991739b7dbe7b889b18daa4cd83215807ff67ae19faf]"
-    GITLAB_USERNAME: "ENCRYPTED[3a3817b2f5dee4994158626d74cc417e4055082601a84cc1eb26bb99dc1cfb0fd539546a9dce92a27f3e82471a0d87b8]"
+    GH_PUSH_REPO_URL: "ENCRYPTED[506ef06695315edeb46eabbbda3d5eeacbe812ba1521b5bdc118b1f6b3cffc9a59d5819d8df47a898e918d9817b8a2d3]"
+    GH_USERNAME: "ENCRYPTED[d9b4beebc6979b0afea52c6923d3b6a3e2a68c86979f0521fc0b73d1142ecf2fce7bbcbedebed25f4c679e82cf635116]"
     GH_EMAIL: "ENCRYPTED[3626131ab61fab2719dd0111697a90436d73aa1444c0ef9f4a3f6c064c9337ec9173898032499e3bba17ca215caa9659]"
     GH_TOKEN: "ENCRYPTED[0c32fb412da99036ea445fe0820659bd35048ea8237c599e145bed7ce53a132b17037b892a152bc18d1fad2f7790e000]"
     TG_TOKEN: "ENCRYPTED[8004fd2f56168e57bd088b325e421530ce796c2e15e7b758869d0364d822de3c05214ce6285d2991df6fcbc7f64ec242]"
     TG_CHAT_ID: "ENCRYPTED[c33289624c311f6dadddded5eac4e548c04a206b0a22592ebc1dbca201f482242ad62f8cf1e27a747e65280a7c8433f3]"
-    CIRRUS_WORKING_DIR: "/tmp/cirrus-ci-build"
+    CIRRUS_WORKING_DIR: "/home/cirrus-ci-build"
     
 task:
   name: "llvm building clang"
@@ -24,7 +22,7 @@ task:
        - for t in ccache gcc g++ cc c++ clang clang++; do ln -vs /usr/bin/ccache /usr/local/bin/$t; done
 
   Build_script:
-       - export CCACHE_DIR=/tmp/cirrus-ci-build/ccache
+       - export CCACHE_DIR=/home/cirrus-ci-build/ccache
        - export CCACHE_EXEC=$(which ccache)
        - export USE_CCACHE=1
        - export CCACHE_COMPRESS=true
