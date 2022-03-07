@@ -40,7 +40,6 @@ tg_post_msg "<b>$LLVM_NAME: Building LLVM. . .</b>"
 ./build-llvm.py \
 	--clang-vendor "$LLVM_NAME" \
 	--branch "main" \
-	--defines "LLVM_PARALLEL_COMPILE_JOBS=$(nproc) LLVM_PARALLEL_LINK_JOBS=$(nproc) CMAKE_C_FLAGS=-O3 CMAKE_CXX_FLAGS=-O3" \
 	--incremental \
 	--projects "clang;lld;polly" \
 	--shallow-clone \
