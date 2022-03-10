@@ -68,7 +68,7 @@ function do_llvm() {
         --targets "ARM;AArch64" \
         --shallow-clone \
         --incremental \
-        --defines "LLVM_PARALLEL_COMPILE_JOBS=8 LLVM_PARALLEL_LINK_JOBS=8"
+        --defines "LLVM_PARALLEL_COMPILE_JOBS=8 LLVM_PARALLEL_LINK_JOBS=8" \
         --build-type "Release" 2>&1 | tee build.log
     
     [ ! -f install/bin/clang-1* ] && {
