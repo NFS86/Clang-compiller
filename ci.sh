@@ -39,9 +39,7 @@ function do_deps() {
         gcc \
         g++ \
         git \
-        libelf-dev \
         libssl-dev \
-        lld \
         make \
         ninja-build \
         python3 \
