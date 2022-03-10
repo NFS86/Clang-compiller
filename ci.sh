@@ -33,7 +33,7 @@ function do_all() {
 }
 
 function do_deps() {
-    apt-get -y update && apt-get -y upgrade && apt-get -y install --no-install-recommends \
+    apt-get -y install --no-install-recommends \
         bc \
         bison \
         ca-certificates \
@@ -69,6 +69,7 @@ function do_llvm() {
         --projects "clang;lld;llvm;polly" \
         --shallow-clone \
         --targets "ARM;AArch64" \
+        --defines "LLVM_PARALLEL_COMPILE_JOBS=8 LLVM_PARALLEL_LINK_JOBS=8"
         --build-type "Release" 2>&1 | tee build.log
 }
 
