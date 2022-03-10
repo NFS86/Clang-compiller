@@ -25,6 +25,3 @@ task:
 
   Building-Binutils_script:
        - ./ci.sh binutils
-
-  Push_script:
-       - ./ci.sh push
