@@ -71,7 +71,6 @@ function do_llvm() {
         --branch "main" \
         --incremental \
         --build-stage1-only \
-        --check-targets clang lld llvm polly \
         --install-stage1-only \
         --projects "clang;lld;llvm;polly" \
         --shallow-clone \
