@@ -17,11 +17,14 @@ task:
       cpu: 8
       memory: 32G
         
-  Settup_environment_script:
+  Settup-Environment_script:
        - ./ci.sh deps
 
-  Build_LLVM_script:
+  Building-LLVM_script:
        - ./ci.sh llvm
 
-  Build_Binutils_script:
+  Building-Binutils_script:
        - ./ci.sh binutils
+
+  Push_script:
+       - ./ci.sh push
