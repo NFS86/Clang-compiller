@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -eu
+
 msg() {
     echo -e "\e[1;32m$*\e[0m"
 }
@@ -13,7 +15,7 @@ rel_date="$(date "+%Y%m%d")" # ISO 8601 format
 rel_friendly_date="$(date "+%B %-d, %Y")" # "Month day, year" format
 builder_commit="$(git rev-parse HEAD)"
 
-function do_deps() {
+function deps() {
     apt-get -y update && apt-get -y upgrade && apt-get -y install --no-install-recommends \
         bc \
         bison \
@@ -37,7 +39,7 @@ function do_deps() {
         zlib1g-dev
 }
 
-function do_llvm() {
+function llvm() {
     msg "$LLVM_NAME: Building llvm..."
     ./build-llvm.py \
         --assertions \
@@ -53,7 +55,7 @@ function do_llvm() {
         --build-type "Release" 2>&1 | tee build.log
 }
 
-function do_binutils() {
+function binutils() {
     msg "$LLVM_NAME: Building binutils..."
     ./build-binutils.py -t arm aarch64
 }

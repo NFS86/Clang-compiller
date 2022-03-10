@@ -18,10 +18,10 @@ task:
       memory: 32G
         
   Settup_environment_script:
-       - ./ci.sh do_deps
+       - ./ci.sh deps
 
   Build_LLVM_script:
-       - ./ci.sh do_llvm
+       - ./ci.sh llvm
 
   Build_Binutils_script:
-       - ./ci.sh do_binutils
+       - ./ci.sh binutils
