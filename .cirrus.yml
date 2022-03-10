@@ -20,11 +20,8 @@ task:
   Settup_environment_script:
        - ./ci.sh do_deps
 
-  Build_LLVM:
+  Build_LLVM_script:
        - ./ci.sh do_llvm
 
-  Build_Binutild:
+  Build_Binutils_script:
        - ./ci.sh do_binutils
-
-  Upload_ccache_script:
-       - ./ziping.sh
