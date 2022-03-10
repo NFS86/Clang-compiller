@@ -2,8 +2,6 @@
 
 set -eu
 
-BASE=$(CIRRUS_WORKING_DIR "$(readlink -f "${0}")")
-
 msg() {
     echo -e "\e[1;32m$*\e[0m"
 }
