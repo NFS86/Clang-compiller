@@ -18,20 +18,13 @@ task:
       memory: 32G
         
   Settup_environment_script:
-       - ./env.sh
-       - for t in ccache gcc g++ cc c++ clang clang++; do ln -vs /usr/bin/ccache /usr/local/bin/$t; done
+       - ./ci.sh do_deps
 
-  Build_script:
-       - export ALLOW_MISSING_DEPENDENCIES=true
-       - export CCACHE_DIR=/home/cirrus-ci-build/ccache
-       - export CCACHE_EXEC=/usr/bin/ccache
-       - export USE_CCACHE=1
-       - ccache -o compression=true
-       - ccache -o compression_level=1
-       - ccache -o limit_multiple=1
-       - ccache -o max_size=150G
-       - ccache -z
-       - ./build-tc.sh
+  Build_LLVM:
+       - ./ci.sh do_llvm
+
+  Build_Binutild:
+       - ./ci.sh do_binutils
 
   Upload_ccache_script:
        - ./ziping.sh
