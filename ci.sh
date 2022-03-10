@@ -10,14 +10,6 @@ err() {
     echo -e "\e[1;41m$*\e[0m"
 }
 
-tg_post_build() {
-	curl --progress-bar -F document=@"$1" "$BOT_MSG_URL" \
-	-F chat_id="$TG_CHAT_ID"  \
-	-F "disable_web_page_preview=true" \
-	-F "parse_mode=html" \
-	-F caption="$3"
-}
-
 function parse_parameters() {
     while ((${#})); do
         case ${1} in
@@ -70,11 +62,6 @@ function do_llvm() {
         --incremental \
         --defines "LLVM_PARALLEL_COMPILE_JOBS=8 LLVM_PARALLEL_LINK_JOBS=8" \
         --build-type "Release" 2>&1 | tee build.log
-    
-    [ ! -f install/bin/clang-1* ] && {
-	err "Building LLVM failed ! Kindly check errors !!"
-	tg_post_build "build.log" "$TG_CHAT_ID" "Error Log"
-	exit 1
 }
 
 function do_binutils() {
