@@ -16,12 +16,12 @@ task:
       image: anggit86/docker:cirrus
       cpu: 8
       memory: 32G
-        
-  Settup-Environment_script:
-       - ./ci.sh deps
 
   Building-LLVM_script:
-       - ./ci.sh llvm
+       - ./build_llvm.sh
 
   Building-Binutils_script:
-       - ./ci.sh binutils
+       - ./build_binutils.sh
+
+  Push_script:
+       - ./push.sh
