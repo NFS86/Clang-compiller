@@ -41,7 +41,7 @@ def download_binutils(folder):
                 entity.unlink()
 
         # Download the tarball
-        binutils_tarball = folder.joinpath(binutils + ".tar.xz")
+        binutils_tarball = folder.joinpath(binutils + ".tar.gz")
         subprocess.run([
             "curl", "-LSs", "-o",
             binutils_tarball.as_posix(),
@@ -50,7 +50,7 @@ def download_binutils(folder):
                        check=True)
         verify_binutils_checksum(binutils_tarball)
         # Extract the tarball then remove it
-        subprocess.run(["tar", "-xJf", binutils_tarball.name],
+        subprocess.run(["tar", "-xzf", binutils_tarball.name],
                        check=True,
                        cwd=folder.as_posix())
         create_gitignore(binutils_folder)
@@ -68,7 +68,7 @@ def verify_binutils_checksum(file):
             if not data:
                 break
             file_hash.update(data)
-    good_hash = "8bf0b0d193c9c010e0518ee2b2e5a830898af206510992483b427477ed178396cd210235e85fd7bd99a96fc6d5eedbeccbd48317a10f752b7336ada8b2bb826d"
+    good_hash = "5160ff5c2a0ad41b880384216e21ada5328b51378e760c04269eb3b3626400d12abeeea72c14e18b52b969a0be94c8e5285c0b568bd5c82b7e69f68e0dfdc743"
     if file_hash.hexdigest() != good_hash:
         raise RuntimeError(
             "binutils: SHA512 checksum does not match known good one!")
