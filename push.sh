@@ -75,7 +75,7 @@ Build completed on:  $(/bin/date)
 LLVM commit: $llvm_commit_url
 Clang Version: $clang_version
 Binutils version: $binutils_ver
-Builder commit: https://$CIRRUS_REPO_FULL_NAME/commit/$builder_commit"
+Builder commit: https://$GH_PUSH_REPO_URL/commit/$builder_commit"
 git gc
 curl -s https://api.telegram.org/bot$TG_TOKEN/sendMessage -d "disable_web_page_preview=true" -d "parse_mode=html" -d chat_id=$TG_CHAT_ID -d text="<b>$LLVM_NAME: Toolchain compilation Finished</b>%0A<b>Clang Version : </b><code>$clang_version</code>%0A<b>LLVM Commit : </b>$llvm_commit_url%0A<b>Binutils Version : </b><code>$binutils_ver</code>"
 git push origin main -f
