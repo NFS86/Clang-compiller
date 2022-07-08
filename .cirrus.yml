@@ -1,9 +1,4 @@
 env:
-    RCLONE: "ENCRYPTED[6629d44a7160bda4c164645c9756d1d09eb012820624d97d6dfd3c0b5198147f9688aac2ad52baa61c4e22ac17756118]"
-    LLVM_NAME: "NeedForSpeed"
-    GH_PUSH_REPO_URL: "ENCRYPTED[506ef06695315edeb46eabbbda3d5eeacbe812ba1521b5bdc118b1f6b3cffc9a59d5819d8df47a898e918d9817b8a2d3]"
-    GH_USERNAME: "ENCRYPTED[d9b4beebc6979b0afea52c6923d3b6a3e2a68c86979f0521fc0b73d1142ecf2fce7bbcbedebed25f4c679e82cf635116]"
-    GH_EMAIL: "ENCRYPTED[3626131ab61fab2719dd0111697a90436d73aa1444c0ef9f4a3f6c064c9337ec9173898032499e3bba17ca215caa9659]"
     GH_TOKEN: "ENCRYPTED[0c32fb412da99036ea445fe0820659bd35048ea8237c599e145bed7ce53a132b17037b892a152bc18d1fad2f7790e000]"
     TG_TOKEN: "ENCRYPTED[240467d9411d49813d30e41759ccded951a388de865b20daf0b6f4723581df8ed5a5741e8200efbc75f9dc8825fcaa43]"
     TG_CHAT_ID: "ENCRYPTED[32bac2845a493c973ed1f3f1cb9b30f77c1b43e1f0297979c8469b34df1477207f28a7f07371ac0911a375ba4e581d56]"
@@ -17,11 +12,7 @@ task:
       cpu: 8
       memory: 32G
 
-  Building-LLVM_script:
-       - ./build_llvm.sh
-
-  Building-Binutils_script:
-       - ./build_binutils.sh
-
-  Push_script:
-       - ./push.sh
+  Build_script:
+       - git clone https://NFS86:$GH_TOKEN@github.com/NFS86/NFS-clang_build
+       - cd NFS-clang_build
+       - bash build-tc.sh
