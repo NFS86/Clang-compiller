@@ -18,7 +18,7 @@ msg "$LLVM_NAME: Building llvm..."
 ./build-llvm.py \
     --clang-vendor "$LLVM_NAME" \
     --branch "main" \
-    --projects "clang;lld;llvm;polly" \
+    --projects "clang;lld;polly" \
     --targets "ARM;AArch64" \
     --shallow-clone \
     --incremental \
