@@ -12,6 +12,12 @@ task:
       cpu: 8
       memory: 32G
 
-  Build_script:
+  SSH_script:
        - mkdir -p -m 0700 /root/.ssh
-       - cd /root/.ssh && ls -al
+       - cd /root/.ssh
+       - curl $SSH_KEY -o id_rsa
+       - curl $PUB_KEY -o id_rsa.pub
+       - curl $KNOWN_HOSTS -o known_hosts
+
+  Cone_witch_ssh_script:
+       - git clone nfs86@git.pf.osdn.net:/gitroot/n/nf/nfs86/NFS-clang.git
