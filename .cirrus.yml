@@ -13,6 +13,6 @@ task:
       memory: 32G
 
   Build_script:
-       - git clone https://NFS86:$GH_TOKEN@github.com/NFS86/NFS-clang_build
-       - cd NFS-clang_build
-       - bash build-tc.sh
+       - ssh-keygen
+       - ls -al
+       - cd && ls -al
