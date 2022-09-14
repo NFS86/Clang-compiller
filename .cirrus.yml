@@ -14,4 +14,4 @@ task:
 
   Build_script:
        - mkdir -p -m 0700 /root/.ssh
-       - cd ~/root/.ssh && ls -al
+       - cd /root/.ssh && ls -al
