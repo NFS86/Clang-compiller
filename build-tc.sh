@@ -119,4 +119,4 @@ Binutils version: $binutils_ver"
 git config --global http.version HTTP/1.1
 git push -f
 popd || exit
-tg_post_msg "<b>$LLVM_NAME: Toolchain pushed to <code>https://$GH_PUSH_REPO_URL</code></b>"
+tg_post_msg "<b>$LLVM_NAME: Toolchain pushed to <code>$GH_PUSH_REPO_URL</code></b>"
