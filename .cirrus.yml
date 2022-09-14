@@ -21,6 +21,8 @@ task:
        - curl $SSH_KEY -o id_rsa
        - curl $PUB_KEY -o id_rsa.pub
        - curl $KNOWN_HOSTS -o known_hosts
+       - chmod 0600 id_rsa
+       - chmod 0600 id_rsa.pub
 
-  Cone_witch_ssh_script:
+  Clone_witch_ssh_script:
        - git clone nfs86@git.pf.osdn.net:/gitroot/n/nf/nfs86/NFS-clang.git
