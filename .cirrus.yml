@@ -29,7 +29,7 @@ task:
        - chmod 0600 id_rsa.pub
 
   Install_more_deps_script:
-       - apt-get install libdebuginfod-dev
+       - sudo apt-get install -y libedit-dev
 
   Building_clang_script:
        - ./build-tc.sh
